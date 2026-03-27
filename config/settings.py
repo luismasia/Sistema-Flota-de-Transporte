@@ -116,3 +116,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+DATOS_EMPRESA = {
+    'NOMBRE': 'Transporte Masia S.A.',
+    'DIRECCION': 'Av. Juan B. Justo 1439, Buenos Aires',
+    'TELEFONO': '+54 11 4250-3229',
+    'EMAIL': 'transportemasia@gmail.com',
+}
