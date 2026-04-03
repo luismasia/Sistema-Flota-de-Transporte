@@ -35,7 +35,7 @@ class Camion(models.Model):
     año = models.IntegerField()
     kilometraje = models.IntegerField()
     estado = models.CharField(max_length=10, choices=ESTADOS, default='activo')
-    chofer_asignado = models.ForeignKey(Chofer, on_delete=models.SET_NULL, null=True, related_name='camion')
+    chofer_asignado = models.ForeignKey(Chofer, on_delete=models.SET_NULL, null=True, blank=True, related_name='camion')
 
     class Meta:
         verbose_name = "Camión"

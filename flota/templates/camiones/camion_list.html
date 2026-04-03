@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Flota de Camiones{% endblock %}
+
+{% block contenido %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gestión de Flota</h2>
+    <a href="{% url 'camion_create' %}" class="btn btn-primary">+ Nuevo Camión</a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Patente</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Estado</th>
+                    <th>Chofer Asignado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for camion in camiones %}
+                <tr>
+                    <td><strong>{{ camion.patente }}</strong></td>
+                    <td>{{ camion.modelo }}</td>
+                    <td>{{ camion.año }}</td>
+                    <td>
+                        {% if camion.estado == 'activo' %}
+                            <span class="badge bg-success">Activo</span>
+                        {% else %}
+                            <span class="badge bg-danger">Inactivo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if camion.chofer_asignado %}
+                            {{ camion.chofer_asignado }}
+                        {% else %}
+                            <span class="text-muted">Sin asignar</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="{% url 'camion_detail' camion.pk %}" class="btn btn-sm btn-outline-info">Ver</a>
+                            <a href="{% url 'camion_update' camion.pk %}" class="btn btn-sm btn-outline-warning">Editar</a>
+                            <a href="{% url 'camion_delete' camion.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No hay camiones registrados aún.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

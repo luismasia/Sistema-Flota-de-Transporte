@@ -62,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'flota.context_processors.informacion_empresa',                
             ],
         },
     },
@@ -119,7 +120,7 @@ STATIC_URL = 'static/'
 
 DATOS_EMPRESA = {
     'NOMBRE': 'Transporte Masia S.A.',
-    'DIRECCION': 'Av. Juan B. Justo 1439, Buenos Aires',
-    'TELEFONO': '+54 11 4250-3229',
+    'DIRECCION': 'Av. Argentina 1234, Buenos Aires',
+    'TELEFONO': '+54 11 1234-5678',
     'EMAIL': 'transportemasia@gmail.com',
 }

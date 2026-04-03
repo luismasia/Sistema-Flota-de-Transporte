@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - {{ block.super }}{% endblock %}
+
+{% block contenido %}
+<div class="p-5 mb-4 bg-light rounded-3 border">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Bienvenido al Sistema de Gestión</h1>
+        <p class="col-md-8 fs-4">Panel de control logístico para la flota de {{ INFO_EMPRESA.NOMBRE }}</p>
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Camiones</h5>
+                <p class="display-6">{{ total_camiones }}</p>
+                <a href="{% url 'camion_list' %}" class="btn btn-outline-primary">Ver flota</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Choferes</h5>
+                <p class="display-6">{{ total_choferes }}</p>
+                <a href="#" class="btn btn-outline-primary">Ver personal</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">En Curso</h5>
+                <p class="display-6 text-success">{{ viajes_activos }}</p>
+                <a href="#" class="btn btn-outline-success">Ver viajes</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
