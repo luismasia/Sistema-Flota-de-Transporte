@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Chofer - {{ chofer.apellido }} {{ chofer.nombre }}{% endblock %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'chofer_list' %}">Gestión de Personal</a></li>
+                <li class="breadcrumb-item active">Detalle: {{ chofer.apellido }} {{ chofer.nombre }}</li>
+            </ol>
+        </nav>
+
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Ficha del Chofer</h3>
+                <span class="badge {% if chofer.estado == 'activo' %}bg-success{% else %}bg-danger{% endif %}">
+                    {{ chofer.get_estado_display }}
+                </span>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-4 fw-bold">Nombre:</div>
+                    <div class="col-sm-8">{{ chofer.apellido }} {{ chofer.nombre }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-4 fw-bold">Fecha de ingreso:</div>
+                    <div class="col-sm-8">{{ chofer.fecha_ingreso }}</div>
+                </div>
+            </div>
+            <div class="card-footer bg-light text-end">
+                <a href="{% url 'chofer_list' %}" class="btn btn-secondary">Volver al listado</a>
+                <a href="{% url 'chofer_update' camion.pk %}" class="btn btn-warning">Editar Datos</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

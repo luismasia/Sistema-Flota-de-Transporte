@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Camion, Chofer, Viaje
-from .forms import CamionForm
+from .forms import CamionForm, ChoferForm
 
 class InicioView(TemplateView):
     template_name = 'inicio.html'
@@ -26,16 +26,67 @@ class CamionDetailView(DetailView):
 class CamionCreateView(CreateView):
     model = Camion
     form_class = CamionForm
-    template_name = 'camiones/camion_form.html'
+    template_name = 'form_generico.html'
     success_url = reverse_lazy('camion_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Registrar nuevo camión'
+        context['cancel_url'] = reverse_lazy('camion_list')
+        return context
 
 class CamionUpdateView(UpdateView):
     model = Camion
     form_class = CamionForm
-    template_name = 'camiones/camion_form.html'
+    template_name = 'form_generico.html'
     success_url = reverse_lazy('camion_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = f'Actualizar datos de {self.object.modelo} - {self.object.patente}'
+        context['cancel_url'] = reverse_lazy('camion_list')
+        return context
 
 class CamionDeleteView(DeleteView):
     model = Camion
     template_name = 'camiones/camion_confirm_delete.html'
     success_url = reverse_lazy('camion_list')
+
+class ChoferListView(ListView):
+    model = Chofer
+    template_name = 'choferes/chofer_list.html'
+    context_object_name = 'choferes'
+
+class ChoferDetailView(DetailView):
+    model = Chofer
+    template_name = 'choferes/chofer_detail.html'
+    context_object_name = 'chofer'
+
+class ChoferCreateView(CreateView):
+    model = Chofer
+    form_class = ChoferForm
+    template_name = 'form_generico.html'
+    success_url = reverse_lazy('chofer_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Registrar nuevo chofer'
+        context['cancel_url'] = reverse_lazy('camion_list')
+        return context    
+
+class ChoferUpdateView(UpdateView):
+    model = Chofer
+    form_class = ChoferForm
+    template_name = 'form_generico.html'
+    success_url = reverse_lazy('chofer_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = f'Actualizar datos de {self.object.apellido}, {self.object.nombre}'
+        context['cancel_url'] = reverse_lazy('camion_list')
+        return context
+
+class ChoferDeleteView(DeleteView):
+    model = Chofer
+    template_name = 'choferes/chofer_confirm_delete.html'
+    success_url = reverse_lazy('chofer_list')

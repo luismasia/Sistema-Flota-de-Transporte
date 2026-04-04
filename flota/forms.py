@@ -1,5 +1,5 @@
 from django import forms
-from .models import Camion
+from .models import Camion, Chofer
 
 class CamionForm(forms.ModelForm):
     class Meta:
@@ -17,4 +17,16 @@ class CamionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CamionForm, self).__init__(*args, **kwargs)
-        self.fields['chofer_asignado'].empty_label = "Ninguno"    
+        self.fields['chofer_asignado'].empty_label = "Ninguno"
+
+class ChoferForm(forms.ModelForm):
+    class Meta:
+        model = Chofer
+        fields = ['nombre', 'apellido', 'fecha_ingreso', 'estado']
+        
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'apellido': forms.TextInput(attrs={'class': 'form-control'}),
+            'fecha_ingreso': forms.DateInput(attrs={'class': 'form-control'}),
+            'estado': forms.Select(attrs={'class': 'form-select'}),
+        }
